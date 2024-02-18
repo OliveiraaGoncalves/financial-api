@@ -38,13 +38,28 @@ class StocksController @Autowired constructor(
                                 close = quote.close?.get(index),
                                 high = quote.high?.get(index),
                                 low = quote.low?.get(index),
-                                volume = quote.volume?.get(index),
+                                volume = quote.volume?.get(index)
                             )
                         )
                     }
                 }
             }
+
+            listStockQuote.forEachIndexed { index, element ->
+                val currentPrice = element.close ?: 0.0
+                if (index > 0) {
+                    val pricePrevious = listStockQuote[index - 1].close ?: 0.0
+                    element.percentageVariation =
+                        calculatePercentageVariation(currentPrice = currentPrice, pricePrevious = pricePrevious)
+                } else {
+                    element.percentageVariation = 0.0
+                }
+            }
             ResponseEntity.ok(listStockQuote)
         } ?: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
+    }
+
+    fun calculatePercentageVariation(currentPrice: Double, pricePrevious: Double): Double {
+        return ((currentPrice - pricePrevious) / pricePrevious) * 100.0
     }
 }

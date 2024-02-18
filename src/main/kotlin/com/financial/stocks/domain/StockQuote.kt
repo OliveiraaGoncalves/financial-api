@@ -7,4 +7,5 @@ data class StockQuote(
     val volume: Long?,
     val high: Double?,
     val low: Double?,
+    var percentageVariation: Double? = 0.0
 )
