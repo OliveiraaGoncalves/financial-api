@@ -22,7 +22,7 @@ class StocksController @Autowired constructor(
         } ?: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
     }
 
-    @GetMapping( "/detailStock")
+    @GetMapping("/detailStock")
     fun getDetailStock(@RequestParam active: String): ResponseEntity<Stock> {
         return repository.getDetailStock(active)?.let {
             ResponseEntity.ok(it)
