@@ -20,7 +20,7 @@ class StockService {
     }
 
     fun getDetailStock(active: String): Stock? {
-        return webClient.getForObject(baseURLDetailStock.plus(active).plus("?interval=1d&range=2mo"), Stock::class.java)
+        return webClient.getForObject(baseURLDetailStock.plus(active).plus("?interval=1d&range=1y"), Stock::class.java)
     }
 
     companion object {
