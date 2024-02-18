@@ -26,7 +26,6 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("com.heroku:webapp-runner:9.0.72.2")
 }
 
 tasks.withType<KotlinCompile> {
