@@ -2,7 +2,9 @@ package com.financial.stocks
 
 import com.financial.stocks.data.StockModel
 import com.financial.stocks.data.StockRepository
+import com.financial.stocks.domain.Quote
 import com.financial.stocks.domain.Stock
+import com.financial.stocks.domain.StockQuote
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -23,9 +25,26 @@ class StocksController @Autowired constructor(
     }
 
     @GetMapping("/detailStock")
-    fun getDetailStock(@RequestParam active: String): ResponseEntity<Stock> {
+    fun getDetailStock(@RequestParam active: String): ResponseEntity<List<StockQuote>> {
+        val listStockQuote = mutableListOf<StockQuote>()
         return repository.getDetailStock(active)?.let {
-            ResponseEntity.ok(it)
+            it.chart?.result?.map { result ->
+                result.timestamp?.forEachIndexed { index, timestamp ->
+                    result.indicators?.quote?.map { quote ->
+                        listStockQuote.add(
+                            StockQuote(
+                                timeStamp = timestamp,
+                                open = quote.open?.get(index),
+                                close = quote.close?.get(index),
+                                high = quote.high?.get(index),
+                                low = quote.low?.get(index),
+                                volume = quote.volume?.get(index),
+                            )
+                        )
+                    }
+                }
+            }
+            ResponseEntity.ok(listStockQuote)
         } ?: ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
     }
 }
