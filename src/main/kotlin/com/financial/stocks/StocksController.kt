@@ -66,7 +66,7 @@ class StocksController @Autowired constructor(
     }
 
     fun calculatePercentageVariation(currentPrice: Double, pricePrevious: Double): Double {
-        return formatPercentage(((currentPrice - pricePrevious) / pricePrevious) * 100, formatDecimal)
+        return formatPercentage(((currentPrice - pricePrevious) / pricePrevious) * 100, formatDecimalPercentage)
             .toDouble()
     }
 
@@ -81,5 +81,6 @@ class StocksController @Autowired constructor(
 
     companion object {
         const val formatDecimal = 4
+        const val formatDecimalPercentage = 2
     }
 }
