@@ -22,5 +22,8 @@ data class SaleModel(
     val productAmount: String? = null,
 
     @Column(name = "product_quantity")
-    val productQuantity: String? = null
+    val productQuantity: String? = null,
+
+    @Column(name = "hash_sale")
+    val hashSale: String? = null
 )

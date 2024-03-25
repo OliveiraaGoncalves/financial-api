@@ -8,7 +8,7 @@ import toEntity
 interface SaleService {
     fun getAllSale(): List<Sale>
 
-    fun findSale(id: Long): Sale
+    fun findSales(hashSale: String): List<Sale>
 
     fun createSale(sale: Sale): Sale
 }
@@ -18,7 +18,7 @@ class SaleServiceImpl(private val saleRepository: SaleRepository) : SaleService 
 
     override fun getAllSale(): List<Sale> = saleRepository.findAll().map { it.toDTO() }
 
-    override fun findSale(id: Long): Sale = saleRepository.findById(id).get().toDTO()
+    override fun findSales(hashSale: String): List<Sale> = saleRepository.findByHashSale(hashSale).map { it.toDTO() }
 
     override fun createSale(sale: Sale): Sale {
         return saleRepository.save(sale.toEntity()).toDTO()

@@ -4,4 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SaleRepository: JpaRepository<SaleModel, Long>
+interface SaleRepository: JpaRepository<SaleModel, Long>{
+
+    fun findByHashSale(hasSale: String): List<SaleModel>
+}

@@ -12,8 +12,8 @@ class SaleController(
     @GetMapping("/allSales")
     fun getAllSale(): ResponseEntity<List<Sale>> = ResponseEntity.ok(service.getAllSale())
 
-    @GetMapping("/sale/{id}")
-    fun getSale(@PathVariable id: Long): ResponseEntity<Sale> = ResponseEntity.ok(service.findSale(id))
+    @GetMapping("/sale/{hashSale}")
+    fun getSale(@PathVariable hashSale: String): ResponseEntity<List<Sale>> = ResponseEntity.ok(service.findSales(hashSale))
 
     @PostMapping("/createSale")
     fun createSale(@RequestBody sale: Sale): ResponseEntity<Sale> = ResponseEntity.ok(service.createSale(sale = sale))
