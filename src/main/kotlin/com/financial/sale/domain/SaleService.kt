@@ -18,7 +18,9 @@ class SaleServiceImpl(private val saleRepository: SaleRepository) : SaleService 
 
     override fun getAllSale(): List<Sale> = saleRepository.findAll().map { it.toDTO() }
 
-    override fun findSales(hashSale: String): List<Sale> = saleRepository.findByHashSale(hashSale).map { it.toDTO() }
+    override fun findSales(hashSale: String): List<Sale> {
+        return saleRepository.findAllByHashSaleLike(hashSale).map { it.toDTO() }
+    }
 
     override fun createSale(sale: Sale): Sale {
         return saleRepository.save(sale.toEntity()).toDTO()
