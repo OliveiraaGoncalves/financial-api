@@ -13,4 +13,4 @@ data class Register(
     val dateEntry: String? = null,
 
     val dateExit: String? = null,
-    )
+)
