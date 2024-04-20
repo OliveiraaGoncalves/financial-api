@@ -7,12 +7,12 @@ import toDTO
 interface VacancyUseCase {
 
     fun findAllVacancy(): List<Vacancy>
-
 }
 
 @Service
-class VacancyUseCaseImpl(private val parkingRepository: VacancyRepository) : VacancyUseCase {
+class VacancyUseCaseImpl(private val vacancyRepository: VacancyRepository) : VacancyUseCase {
+
     override fun findAllVacancy(): List<Vacancy> {
-        return parkingRepository.findAll().map { it.toDTO() }
+        return vacancyRepository.findAll().map { it.toDTO() }
     }
 }

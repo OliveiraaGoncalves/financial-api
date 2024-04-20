@@ -7,7 +7,4 @@ import org.springframework.stereotype.Repository
 @Repository
 interface RegisterRepository: JpaRepository<RegisterModel, Long> {
 
-    @Query("select v from RegisterModel v")
-    override fun findAll(): List<RegisterModel>
-
 }
