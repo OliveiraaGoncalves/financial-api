@@ -10,5 +10,7 @@ data class Register(
 
     val vacancyId: String? = null,
 
-    val rantDate: String? = null,
-)
+    val dateEntry: String? = null,
+
+    val dateExit: String? = null,
+    )
