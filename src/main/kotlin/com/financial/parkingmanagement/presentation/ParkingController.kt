@@ -7,6 +7,7 @@ import com.financial.parkingmanagement.domain.VacancyUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -25,4 +26,8 @@ class ParkingController(
 
     @GetMapping("/allRegisters")
     fun gelAllRegisters(): ResponseEntity<List<Register>> = ResponseEntity.ok(registerUseCase.getAllRegisters())
+
+    @PutMapping("/updateRegister")
+    fun updateRegister(@RequestBody register: Register): ResponseEntity<Register> =
+        ResponseEntity.ok(registerUseCase.register(register))
 }

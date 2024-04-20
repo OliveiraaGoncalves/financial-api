@@ -18,7 +18,7 @@ data class RegisterModel(
     val plate: String? = null,
 
     @Column(name = "vacancy_id")
-    val vacancyId: String? = null,
+    val vacancyId: Int? = null,
 
     @Column(name = "date_entry")
     val dateEntry: String? = null,

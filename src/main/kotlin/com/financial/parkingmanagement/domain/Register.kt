@@ -8,7 +8,7 @@ data class Register(
 
     val plate: String? = null,
 
-    val vacancyId: String? = null,
+    val vacancyId: Int? = null,
 
     val dateEntry: String? = null,
 
