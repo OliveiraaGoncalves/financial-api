@@ -3,7 +3,7 @@ package com.financial.parkingmanagement.data
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "register_model")
+@Table(name = "register")
 data class RegisterModel(
 
     @Id

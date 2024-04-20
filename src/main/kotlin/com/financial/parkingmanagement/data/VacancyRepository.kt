@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ParkingRepository: JpaRepository<VacancyModel, Long> {
+interface VacancyRepository: JpaRepository<VacancyModel, Long> {
 
     @Query("select v from VacancyModel v")
     override fun findAll(): List<VacancyModel>
+
+
 
 }
