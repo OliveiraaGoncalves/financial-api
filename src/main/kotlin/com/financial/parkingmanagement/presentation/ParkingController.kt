@@ -22,4 +22,7 @@ class ParkingController(
     @PostMapping("/register")
     fun saveRegister(@RequestBody register: Register): ResponseEntity<Register> =
         ResponseEntity.ok(registerUseCase.register(register))
+
+    @GetMapping("/allRegisters")
+    fun gelAllRegisters(): ResponseEntity<List<Register>> = ResponseEntity.ok(registerUseCase.getAllRegisters())
 }

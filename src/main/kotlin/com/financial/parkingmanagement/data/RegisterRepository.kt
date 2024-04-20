@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface RegisterRepository: JpaRepository<RegisterModel, Long> {
 
+    override fun findAll(): MutableList<RegisterModel>
 }

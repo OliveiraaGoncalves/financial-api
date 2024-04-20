@@ -11,7 +11,7 @@ data class RegisterModel(
     @Column(name = "id")
     val id: Long? = null,
 
-    @Column(name = "driverName")
+    @Column(name = "driver_name")
     val driverName: String? = null,
 
     @Column(name = "plate")
@@ -20,7 +20,9 @@ data class RegisterModel(
     @Column(name = "vacancy_id")
     val vacancyId: String? = null,
 
-    @Column(name = "rantDate")
-    val rantDate: String? = null,
+    @Column(name = "date_entry")
+    val dateEntry: String? = null,
 
+    @Column(name = "date_exit")
+    val dateExit: String? = null,
 )

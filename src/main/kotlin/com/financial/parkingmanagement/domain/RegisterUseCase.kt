@@ -7,6 +7,7 @@ import toEntity
 
 interface RegisterUseCase {
     fun register(register: Register): Register
+    fun getAllRegisters(): List<Register>
 }
 
 @Service
@@ -16,4 +17,6 @@ class RegisterUseCaseImpl(
     override fun register(register: Register): Register {
         return registerRepository.save(register.toEntity()).toDTO()
     }
+
+    override fun getAllRegisters(): List<Register> = registerRepository.findAll().map { it.toDTO() }
 }
