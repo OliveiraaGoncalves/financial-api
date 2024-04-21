@@ -1,9 +1,6 @@
 package com.financial.parkingmanagement.presentation
 
-import com.financial.parkingmanagement.domain.Register
-import com.financial.parkingmanagement.domain.RegisterUseCase
-import com.financial.parkingmanagement.domain.Vacancy
-import com.financial.parkingmanagement.domain.VacancyUseCase
+import com.financial.parkingmanagement.domain.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -17,8 +14,10 @@ class ParkingController(
     fun gelAllVacancy(): ResponseEntity<List<Vacancy>> = ResponseEntity.ok(useCase.findAllVacancy())
 
     @PostMapping("/register")
-    fun saveRegister(@RequestBody register: Register): ResponseEntity<Register> =
-        ResponseEntity.ok(registerUseCase.register(register))
+    fun saveRegister(@RequestBody register: Register): ResponseEntity<Register> {
+        register.vacancyId?.let { useCase.updateStatus(it, StatusVacancy.OCUPADO.name) }
+        return ResponseEntity.ok(registerUseCase.register(register))
+    }
 
     @GetMapping("/allRegisters")
     fun gelAllRegisters(
@@ -27,6 +26,8 @@ class ParkingController(
     ): ResponseEntity<List<Register>> = ResponseEntity.ok(registerUseCase.getAllRegisters(dateEntry, dateExit))
 
     @PutMapping("/updateRegister")
-    fun updateRegister(@RequestBody register: Register): ResponseEntity<Register> =
-        ResponseEntity.ok(registerUseCase.register(register))
+    fun updateRegister(@RequestBody register: Register): ResponseEntity<Register> {
+        register.vacancyId?.let { useCase.updateStatus(it, StatusVacancy.DISPONIVEL.name) }
+        return ResponseEntity.ok(registerUseCase.register(register))
+    }
 }
