@@ -7,7 +7,7 @@ import toEntity
 
 interface RegisterUseCase {
     fun register(register: Register): Register
-    fun getAllRegisters(): List<Register>
+    fun getAllRegisters(dateEntry: Boolean, dateExit: Boolean): List<Register>
 }
 
 @Service
@@ -18,5 +18,18 @@ class RegisterUseCaseImpl(
         return registerRepository.save(register.toEntity()).toDTO()
     }
 
-    override fun getAllRegisters(): List<Register> = registerRepository.findAll().map { it.toDTO() }
+    override fun getAllRegisters(dateEntry: Boolean, dateExit: Boolean): List<Register> {
+        return when {
+            dateEntry -> {
+                registerRepository.findAllByDateEntry().map { it.toDTO() }
+            }
+            dateExit -> {
+                registerRepository.findAllByDateExit().map { it.toDTO() }
+            }
+
+            else -> {
+                registerRepository.findAll().map { it.toDTO() }
+            }
+        }
+    }
 }
