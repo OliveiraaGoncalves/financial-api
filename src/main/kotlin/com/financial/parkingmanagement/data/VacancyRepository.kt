@@ -6,11 +6,13 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface VacancyRepository: JpaRepository<VacancyModel, Long> {
-
-    @Query("SELECT vacancy.id, vacancy.number\n" +
+    @Query("SELECT vacancy.id, vacancy.number,\n" +
+            "       CASE WHEN register.date_exit is not null THEN 'Disponível'\n" +
+            "            WHEN register.date_entry IS NULL THEN 'Disponível'\n" +
+            "            ELSE 'Ocupada'\n" +
+            "           END AS status_vaga\n" +
             "FROM vacancy\n" +
-            "         LEFT OUTER JOIN register\n" +
-            "                         ON vacancy.id = register.vacancy_id\n" +
-            "WHERE register.vacancy_id IS NULL;", nativeQuery = true)
+            "         LEFT JOIN register\n" +
+            "                   ON vacancy.id = register.vacancy_id;", nativeQuery = true)
     override fun findAll(): List<VacancyModel>
 }
